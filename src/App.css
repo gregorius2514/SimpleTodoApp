@@ -1,0 +1,23 @@
+.note {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    width: 500px;
+    padding: 15px;
+    margin-left: 30%;
+    margin-bottom: 5px;
+}
+
+.email {
+  font-size: 12px;
+    color: grey;
+    position: relative;
+    top: -80px;
+    text-align: right;
+}
+
+.title {
+  font-size: 12px;
+    font-weight: bold;
+}
+.bodyText {
+}
