@@ -25,3 +25,9 @@
 .done-note {
   color: red;
 }
+
+.title {
+width: 426px;
+    margin-left: 20px;
+    word-wrap: break-word;
+}
