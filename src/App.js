@@ -19,31 +19,40 @@ class App extends Component {
     }
 
     getRepos() {
-        axios.get("http://jsonplaceholder.typicode.com/posts/1/comments").then(response => {
+        //axios.get("http://jsonplaceholder.typicode.com/posts/1/comments").then(response => {
+        //this.setState({ notes: response.data });
+        //});
+        axios.get("http://localhost:8080/springDemo/rest/getNotes").then(response => {
             this.setState({ notes: response.data });
         });
     }
 
     saveNote() {
-        if (this.state.noteName === '') {
+        let noteName = this.state.noteName;
+        if (noteName === '') {
             return;
         }
-        let notes = this.state.notes.slice();
-        notes.push({
-            name: this.state.noteName
-        });
-        this.setState({
-            notes: notes,
-            noteName: ''
-        });
 
+
+        axios.post("http://localhost:8080/springDemo/rest/addNote", {
+            postId: 0,
+            name: this.state.noteName
+        }).then(response => {
+            this.setState({
+                notes: response.data,
+                noteName: ''
+            });
+        });
     }
 
     deleteNote(note) {
-        var array = this.state.notes;
-        var index = array.indexOf(note)
-        array.splice(index, 1);
-        this.setState({ notes: array });
+        axios.get("http://localhost:8080/springDemo/rest/deleteNote", {
+            params: {
+                postId: note.postId
+            }
+        }).then(response => {
+            this.setState({ notes: response.data });
+        });
     }
 
     updateTextValue(event) {
@@ -57,8 +66,8 @@ class App extends Component {
     }
 
     render() {
-        let comments = this.state.notes.map((item) => {
-            return <div id={item.postId} className="note">
+        let comments = this.state.notes.map((item, index) => {
+            return <div id={item.postId} className="note" key={index}>
                 <div className="title">{item.name}</div>
                 <div className="remove-note-buttons-left" onClick={(event) => this.setNoteAsDone(event)}>
                     <a href="#">
