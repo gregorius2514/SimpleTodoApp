@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 class App extends Component {
-    urlRoot = "https://jsonplaceholder.typicode.com";
+    urlRoot = "http://localhost:8080/springDemo/rest";
 
     constructor() {
         super();
@@ -22,7 +22,7 @@ class App extends Component {
         //axios.get("http://jsonplaceholder.typicode.com/posts/1/comments").then(response => {
         //this.setState({ notes: response.data });
         //});
-        axios.get("http://localhost:8080/springDemo/rest/getNotes").then(response => {
+        axios.get(this.urlRoot + "/getNotes").then(response => {
             this.setState({ notes: response.data });
         });
     }
@@ -34,7 +34,7 @@ class App extends Component {
         }
 
 
-        axios.post("http://localhost:8080/springDemo/rest/addNote", {
+        axios.post(this.urlRoot + "/addNote", {
             postId: 0,
             name: this.state.noteName
         }).then(response => {
@@ -46,7 +46,7 @@ class App extends Component {
     }
 
     deleteNote(note) {
-        axios.get("http://localhost:8080/springDemo/rest/deleteNote", {
+        axios.get(this.urlRoot + "/deleteNote", {
             params: {
                 postId: note.postId
             }
