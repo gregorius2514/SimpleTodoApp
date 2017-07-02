@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.xsrfCookieName = "csrftoken";
 import './App.css';
 
 class App extends Component {
-    urlRoot = "/springDemo/rest";
+    urlRoot = "";
 
     constructor() {
         super();
@@ -19,9 +21,6 @@ class App extends Component {
     }
 
     getRepos() {
-        //axios.get("http://jsonplaceholder.typicode.com/posts/1/comments").then(response => {
-        //this.setState({ notes: response.data });
-        //});
         axios.get(this.urlRoot + "/getNotes").then(response => {
             this.setState({ notes: response.data });
         });
@@ -32,7 +31,6 @@ class App extends Component {
         if (noteName === '') {
             return;
         }
-
 
         axios.post(this.urlRoot + "/addNote", {
             postId: 0,
@@ -70,35 +68,35 @@ class App extends Component {
             return <div id={item.postId} className="note" key={index}>
                 <div className="title">{item.name}</div>
                 <div className="remove-note-buttons-left" onClick={(event) => this.setNoteAsDone(event)}>
-                    <a href="#">
-                        <i className="glyphicon glyphicon-ok"></i>
-                    </a>
+                <a href="#">
+                <i className="glyphicon glyphicon-ok"></i>
+                </a>
                 </div>
                 <div className="remove-note-buttons-right" onClick={(event) => this.deleteNote(item)}>
-                    <a href="#">
-                        <i className="glyphicon glyphicon-remove"></i>
-                    </a>
+                <a href="#">
+                <i className="glyphicon glyphicon-remove"></i>
+                </a>
                 </div>
-            </div>
+                </div>
         });
 
         return (
             <div className="i-am-centered">
-                <div className="row">
-                    <h1>Simple note app</h1>
-                    <div className="input-group note">
-                        <input className="form-control" type='text' placeholder="Your's new note" value={this.state.noteName}
-                            onChange={(event) => this.updateTextValue(event)} />
-                        <span className="input-group-btn">
-                            <button className="btn btn-default" type="button" onClick={(event) => this.saveNote()}>
-                                <i className="glyphicon glyphicon-saved"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div>
-                        {comments}
-                    </div>
-                </div>
+            <div className="row">
+            <h1>Simple note app</h1>
+            <div className="input-group note">
+            <input className="form-control" type='text' placeholder="Your's new note" value={this.state.noteName}
+            onChange={(event) => this.updateTextValue(event)} />
+            <span className="input-group-btn">
+            <button className="btn btn-default" type="button" onClick={(event) => this.saveNote()}>
+            <i className="glyphicon glyphicon-saved"></i>
+            </button>
+            </span>
+            </div>
+            <div>
+            {comments}
+            </div>
+            </div>
             </div>
         );
     }
