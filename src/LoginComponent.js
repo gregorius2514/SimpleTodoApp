@@ -22,13 +22,27 @@ class LoginComponent extends Component {
             // this.setState({ notes: response.data });
         });
         */
+        axios.get("http://localhost:8080/auth/login", {
+            params: {
+                login: this.state.login,
+                password: this.state.password
+            }
+        }).then(response => {
+            // this.setState({ notes: response.data });
+            console.log(response);
+        });
     }
 
     updateLogin(event) {
+        this.setState({
+            login: event.target.value
+        });
     }
 
     updatePassword(event) {
-
+        this.setState({
+            password: event.target.value
+        });
     }
 
     render() {

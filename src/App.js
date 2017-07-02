@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 class App extends Component {
-    urlRoot = "http://localhost:8080/springDemo/rest";
+    urlRoot = "/springDemo/rest";
 
     constructor() {
         super();

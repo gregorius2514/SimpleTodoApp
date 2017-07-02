@@ -7,6 +7,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/bootstrap/dist/css/bootstrap-theme.css';
 
 ReactDOM.render(
-  <LoginComponent />,
+  <App />,
   document.getElementById('root')
 );
